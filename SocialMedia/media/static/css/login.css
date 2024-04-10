@@ -1,0 +1,88 @@
+
+* {
+    margin: 0;
+}
+
+
+.whole-screen-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(245, 245, 245, 0.828);
+  
+    
+}
+
+form {
+    height: 50%;
+    width: 30%;
+    border: 1px solid whitesmoke;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.login-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.username-container {
+    display: grid;
+    justify-content: center;
+    height: 30%;
+    grid-template-columns: 0.8fr;
+    
+}
+
+.username-container > input {
+    border: 0;
+    background-color: transparent;
+    border-bottom: 1px solid gray;
+
+}
+
+.username-container >input:focus {
+    outline: 0;
+}
+
+.submit-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr;
+    align-items: center;
+    height: 100%;
+}
+
+.submit-container2 {
+    justify-self: center;
+    width: 40%;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    
+}
+
+.submit-container2 > button {
+    width: 100%;
+    background-color: #202020;
+    color: white;
+    height: 30%;
+    border: 0;
+    border-radius: 20px;
+}
+
+.submit-container2 > button:hover {
+    cursor: pointer;
+}
+
+.bottom-container {
+    font-size: 20px;
+}

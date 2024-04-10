@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    
+}
+
+body {
+    background-image: linear-gradient(to bottom right, #FF3E9D, #0E1F40);
+}
+
+.super-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-container {
+    display: grid;
+    row-gap: 30px;
+    text-align: center;
+    
+    
+}
+
+.intro-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+}
+
+
+.intro-btn-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 7px;
+}
+
+#welcome, #to, #talkme {
+    font-size: 3rem;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+@keyframes k {
+    
+    0% {
+        
+        opacity: 0;
+        display: grid;
+    }
+    50% {opacity: 0.1;}
+    80%{opacity: 0.5;}
+    100% {opacity: 1;}
+    
+    
+}
+
+.body-super-container {
+    
+    width: 100%;
+    display: grid;
+    
+    
+}
+
+.body-container {
+    display: grid;
+    grid-template-rows: 0.5fr 0.5fr 1fr 0.3fr;
+    row-gap: 10px;
+    
+}
+
+
+.choose-profile-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-self: center;
+    width: 30%;
+    align-items: end;
+
+}
+
+.names-container {
+    display: grid;
+    grid-template-rows: 0.3fr 0.3fr 0.3fr;
+    row-gap: 15px;
+    justify-self: center;
+    width: 30%;
+    grid-template-columns: 0.5fr;
+    justify-content: center;
+    
+    
+}
+
+.bio-container {
+    display: grid;
+    width: 50%;
+    justify-self: center;
+}
+
+.bio-container > textarea {
+   width: 100%;
+   
+}
+
+.set-background-container {
+    justify-self: center;
+    width: 30%;
+}
+
+.btn-submit-container {
+    justify-self: center;
+    margin-top: 50px;
+    display: grid;
+    
+}
+
+
+
+#profile-input {
+    align-self: center;
+}
+
+#bio-text {
+    font-size: 25px;
+}
+
+#btn-submit {
+    border: 0;
+    background-color: #00994C;
+    color: white;
+    border-radius: 20px
+}
+#btn-submit:hover {
+    cursor: pointer;
+}
+
+#skip-setting-profile > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#skip-setting-profile, #btn-setup-profile {
+    background-color: #0066CC;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+#skip-setting-profile:hover, #btn-setup-profile:hover {
+    cursor: pointer;
+}
+
+#choose-pic-title {
+    color: white;
+}

@@ -1,0 +1,473 @@
+* {
+    margin: 0;
+}
+h1 {
+    color: white;
+}
+body {
+    background-color: #212121;
+}
+
+p {
+    color: white;
+}
+
+header {
+    text-align: center;
+}
+
+.nav {
+    position: fixed;
+    top: 0px;
+    height: 50%;
+    width: 6%;
+    border: 1px solid #d3d3d3;
+    background-color: #f8f8f8;
+}
+
+
+.nav-container{
+   
+   display: grid;
+   grid-template-rows: 1fr 1fr 1fr 1fr;
+   width: 100%;
+   align-items: end;
+   justify-content: center;
+  
+}
+
+.home-logout-container {
+    align-self: center;
+}
+
+.home-logout-container button a {
+    text-decoration: none;
+    color: white;
+    background-color: #FF3333;
+}
+.home-logout-container button {
+    background-color: #FF3333;
+    border: 0;
+    border-radius: 10px;
+}
+
+#btn-message {
+    background-image: url("images/message.jpg");
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    border: 0;
+    border-radius: 25px;
+}
+
+#btn-message:hover {
+    box-shadow: 1px 1px 7px;
+}
+.home-nav-container {
+    align-self: self-start;
+}
+
+.home-message-container {
+    align-self: center;
+    justify-self: center;
+}
+
+#btn-layout-profile {
+    background-color: transparent;
+    border: 0;
+    border-radius: 30px;
+}
+
+#img-layout-profile {
+    
+    
+    height: 70px;
+    width: 70px;
+    border: 0;
+    border-radius: 30px;
+}
+
+#btn-home {
+    
+    
+    background-repeat: no-repeat;
+    border: 0;
+    
+}
+
+#img-layout-profile:hover {
+    box-shadow: 1px 1px 5px;
+}
+
+.nav-container div:hover {
+    cursor: pointer;
+    
+}
+
+
+.whole-screen {
+    display: grid;
+    grid-template-columns: 1fr;
+   
+    height: 95vh;
+    width: 95vw;
+   
+    
+
+}
+
+.post-container {
+    display: grid;
+    width: 100%;
+    justify-content: center;
+    grid-template-columns: 1fr;
+    height: 20vh;
+    align-items: center;
+    
+    
+}
+
+.post-element1-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 0.4fr;
+    height: 55%;
+    
+    
+   
+}
+
+.post-element1-container > input {
+    background-color: #343434;
+    font-size: 25px;
+    border: 0;
+    border-radius: 15px;
+    color: white;
+    
+
+}
+::placeholder {
+    color: white;
+}
+.post-element1-container > input:focus {
+    outline: 0;
+}
+
+.post-element2-container{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 0.2fr;
+    height: 10%;
+    align-self: first baseline;
+   
+    
+}
+
+.post-element2-container > button {
+    background-color: #0080FF;
+    border: 0;
+    border-radius: 15px;
+    color: white;
+
+}
+
+.all-posts-container1 {
+    display: grid;
+    justify-content: center;
+    width: 100%;
+    row-gap: 35px;
+ 
+}
+
+.all-posts-container2 {
+   
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    width: 50vw;
+    justify-content: center;
+    grid-template-columns: 1fr;
+    
+    background-color: #343434;
+    /*background-color: #f8f8f8;*/
+    border-radius: 10px;
+    
+}
+
+#post-profile-pic {
+   
+    width: 90px;
+    height: 90px;
+    border-radius: 50px;
+    margin-top: 5px;
+}
+
+.image-container img {
+    height: 100%;
+    width: 100%;
+}
+
+
+
+.image-container {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.posts-top-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 100px 200px;
+    
+    
+}
+
+.post-text-container {
+    display: grid;
+    
+    justify-content: center;
+    
+}
+
+
+
+.post-text {
+    font-size: 20px;
+}
+
+.buttons-post-container1 {
+    display: grid;
+    align-items: end;
+}
+.buttons-post-container2 {
+    
+    margin-bottom: 10px;
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.img-icon-button, .img-like-button, .img-dislike-button {
+    
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    border: 0;
+    background-color: transparent;
+    background-position: center;
+}
+
+
+
+.btns-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+}
+#like-container {
+    justify-self: start;
+}
+.btns-container > p {
+    margin: 0;
+}
+
+#btn-like-standard {
+    background-image: url("images/icon-like.png");
+    margin-left: 10px;
+}
+
+#btn-like-liked {
+    background-image: url('images/download.png');
+    margin-left: 10px;
+}
+
+#btn-dislike {
+    margin-top: 5px;
+    background-image: url("images/dislike.png");
+}
+
+#btn-dislike-standard {
+    background-image: url("images/dislike.png");
+    background-color: transparent;
+}
+
+#btn-dislike-disliked {
+    background-image: url("images/dislike.jpeg");
+    background-color: transparent;
+
+}
+
+#btn-comment {
+    background-image: url("images/comment.jpeg");
+}
+
+#btn-share {
+    background-image: url("images/shareicon.webp");
+}
+
+
+.suggested-people-container {
+    z-index: 2;
+    position: absolute;
+    right: 0px;
+
+}
+
+.names-container {
+    display: grid;
+    justify-content: center;
+    
+}
+
+.names-container p {
+    font-size: 19px;
+    
+}
+
+#full-name {
+    font-weight: bold;
+}
+
+
+.suggested-people-container {
+    margin-right: 20px;
+    width: 18%;
+}
+
+.suggested-people-container2 {
+    display: grid;
+    grid-template-rows: 1fr;
+    row-gap: 15px;
+    border: 1px solid transparent;
+    background-color: #343434;
+    border-radius: 10px;
+    
+}
+
+.suggested-people-container3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d3d3d3;
+    background-color: #343434;
+    border-radius: 8px;
+    
+   
+    
+}    
+
+.suggested-people-container3 div p {
+    margin: 0;
+}
+
+#suggested-people-profile {
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    border-radius: 27px;
+}
+
+.btn-follow-container {
+    display: grid;
+    justify-content: end;
+}
+.btn-follow-container button {
+    background-color: #0080FF;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    margin-right: 5px;
+    
+}
+
+.view-all-container {
+    display: grid;
+    justify-content: center;
+}
+
+.title-suggested-container {
+    display: grid;
+    justify-content: center;
+}
+
+.title-suggested-container p {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.comment-container {
+    display: grid;
+    
+    grid-template-columns: 0.4fr;
+   justify-content: right;
+}
+.comment-container > div {
+    border: 1px solid #d3d3d3;
+    background-color: #202020;
+    display: grid;
+    row-gap: 30px;
+    grid-template-rows: 0.2fr 1.2fr 0.3fr;
+    
+}
+.comment-user-names-container, .comment-input-container, .comment-btn-submit-container {
+    display: grid;
+    justify-content: center;
+}
+
+.comment-btn-submit-container {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    
+}
+
+.comment-input-container{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#btn-comment-submit {
+    background-color: #00994C;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+#btn-comment-cancel {
+    background-color: #FF3333;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+.all-comments {
+    display: grid;
+    grid-template-columns: 0.4fr;
+    row-gap: 15px;
+    justify-content: right;
+}
+.post-comment{
+    display: grid;
+    justify-content: center;
+    border: 1px solid #202020;
+    background-color: #202020;
+}
+
+
+
+.comment-post-container {
+    display: grid;
+    row-gap: 10px;
+}
+
+#like-count, #dislike-count, #comment-number {
+    color: black;
+}
+

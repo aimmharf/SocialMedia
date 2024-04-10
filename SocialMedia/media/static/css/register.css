@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+}
+
+.register-body {
+    background-image: url("images/Red-Light-Blue-Wallpapers-and-Background-Images-stmed.net.jpg");
+    background-repeat: no-repeat;
+    
+   
+}
+.register-container {
+    display: grid;
+    row-gap: 20px;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 0.9fr;
+    margin-top: 10px;
+    
+
+}
+
+.whole-screen-container {
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    border: 2px solid whitesmoke;
+    height: 60%;
+    width: 30%;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+   
+    
+}
+
+
+.first-name-container, .last-name-container, .email-container, .password-container, .password2-container, .username-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 60%;
+}
+
+.first-name-container > input, .last-name-container > input, .email-container > input, .password-container > input, .password2-container > input, .username-container > input {
+    border-radius: 19px;
+    border: 0;
+    background-color: transparent;
+    color: white;
+    font-size: 20px;
+    
+    
+}
+
+::placeholder {
+    color: white;
+}
+
+.first-name-container > input:focus, .last-name-container > input:focus, .email-container > input:focus, .password-container > input:focus, .password2-container > input:focus, .username-container > input:focus {
+    outline: 0;
+}
+
+.submit-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 70%;
+}
+
+.submit-container > button {
+    background-color: #009999;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+
+}
+.submit-container>button:hover {
+    cursor: pointer;
+}

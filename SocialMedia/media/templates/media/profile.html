@@ -1,0 +1,72 @@
+{% extends 'media/layout.html'%}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/profile.css">
+    <script src="/static/js/profile.js"></script>
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="whole-page-container">
+        <div class="top-container">
+            <div class="image-profile-container">
+                <img src="/medias/{{request.user.profile_image}}" alt="">
+            </div>
+            <div class="names-profile-container">
+                <div class="names-profile-container1">
+                    <p>{{id.first_name}}</p>
+                    <p>{{id.last_name}}</p>
+                </div>
+                <div class="names-profile-container2">
+                    <p>@{{id.username}}</p>
+                </div>
+                <div class="followers-container">
+                    <div><p>Followers: {{followers_count}}</p></div>
+                    <div><p>Following: {{following_count}}</p></div>
+                    
+                    
+                </div>
+                <div class="message-container">
+                    <div>
+                        {% if request.user.username != id.username %}
+                            {% if isFollowing %}
+                                <button id="btn-unfollow" class="btn-follow">Unfollow</button>
+                            {% else %}
+                                <button id="btn-follow" class="btn-follow">Follow</button> 
+                            {% endif %}
+                            
+                            <button class="btn-message">Message</button>
+                        {% endif %}
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="about-container">
+                <p>About Me:</p>
+                <p>{{id.bio}}</p>
+            </div>
+        </div>
+        <div class="bottom-container">
+            {% for post in allposts %}
+            <div class="post-profile-container">
+                <div class="username-prof-post-container"><p>{{post.username}}</p></div>
+                <div class="post-prof-text-container">
+                    <p>{{post.post}}</p>
+                </div>
+                <div class="views-profile-container">
+                    <p>views</p>
+                    <p>Likes</p>
+                    <p>Dislikes</p>
+                </div>
+                <div class="date-container">
+                    <p>Posted On: {{post.date}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

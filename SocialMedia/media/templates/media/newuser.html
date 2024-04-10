@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk Me</title>
+    <script src="/static/js/newuser.js"></script>
+    <link rel="stylesheet" href="/static/css/newuser.css">
+    
+</head>
+<body>
+    <div class="super-container">
+        <div class="header-container">
+            <div class="intro-container">
+                <h1 id="welcome">Welcome</h1>
+                <h1 id="to">To</h1>
+                <h1 id="talkme">Talk Me</h1>
+            </div>
+            
+            <div class="intro-btn-container">
+                <button id="btn-setup-profile">Set up profile</button>
+                <button id="skip-setting-profile"><a href="{% url 'index' %}"  >Skip</a></button>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div class="body-super-container">
+        <form class="body-container" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="choose-profile-container">
+                <label id="choose-pic-title" for="profile" style="color: black; font-weight: bold;">Choose Your Profile Picture</label>
+                <input id="profile-input" name="profile_img_url" type="file" placeholder="Enter the image url">
+            </div>
+            <div class="names-container">
+                <input type="text" id="username-input" placeholder="" name="new_username" value="{{user.username}}">
+                <input type="text" id="firstname-input" placeholder="" name="new_first_name" value="{{user.first_name}}">
+                <input type="text" id="lastname-input" placeholder="" name="new_last_name" value="{{user.last_name}}">
+                
+            </div>
+            <div class="bio-container">
+                <textarea name="bio" id="bio-text" cols="30" rows="10" placeholder="Tell Everyone About Yourself"></textarea>
+            </div>
+
+            <div class="btn-submit-container">
+                <button id="btn-submit">Finish Setting Up Profile</button>
+            </div>
+            <!--
+                <div class="set-background-container">
+                <input type="text" placeholder="Set A Background Image">
+                <label for="default-screen">Keep The Default</label>
+                <input name="default-screen" type="checkbox">
+            </div>
+            -->
+            
+                
+        </form>
+    </div>
+
+</body>
+</html>

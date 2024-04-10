@@ -1,0 +1,181 @@
+body {
+    background-color: #202020;
+}
+
+h1 {
+    color: white;
+}
+p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+.whole-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+
+}
+
+
+.image-profile-container {
+    display: grid;
+    justify-content: center;
+    
+  
+}
+
+.image-profile-container img {
+   
+    object-fit: cover;
+    height: 250px;
+    width: 270px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.top-container {
+    display: grid;
+    grid-template-rows: 250px 1fr 1fr;
+    margin-top: 80px;
+    width: 50%;
+
+    row-gap: 10px;
+    
+    justify-content: center;
+    grid-template-columns: 1fr;
+   
+}
+
+.names-profile-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    width: 100%;
+    row-gap: 15px;
+    
+    
+}
+
+.names-profile-container1 {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.names-profile-container2 {
+    display: grid;
+    justify-content: center;
+}
+
+.names-profile-container2 p {
+    font-weight: normal;
+   
+}
+
+
+.followers-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    
+}
+
+.followers-container div {
+    display: grid;
+    justify-content: center;
+}
+
+.message-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.message-container div {
+    height: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    column-gap: 10px;
+   
+}
+
+
+.bottom-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    
+    width: 100%;
+    height: 100%;
+    margin-top: 70px;
+    row-gap: 20px;
+}
+
+.post-profile-container {
+   
+    background-color: #FFFFFF1A;
+    margin-left: 20px;
+    
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr ;
+}
+
+
+
+.views-profile-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+}
+
+.username-prof-post-container {
+    display: grid;
+    justify-content: center;
+}
+
+.post-prof-text-container {
+    display: grid;
+    justify-self: center;
+}
+
+.date-container {
+    display: grid;
+    justify-content: center;
+}
+
+.about-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  
+}
+
+
+.btn-follow {
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
+
+.btn-message {
+    color: white;
+    background-color: #00994C;
+    border: 0;
+    border-radius: 10px;
+}
+
+#btn-follow {
+    background-color: #0066CC;
+}
+#btn-unfollow {
+    background-color: #FF3333;
+}

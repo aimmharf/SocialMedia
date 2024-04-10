@@ -1,0 +1,154 @@
+{% extends 'media/layout.html' %}
+
+{% block head %}
+    <script src="/static/js/index.js"></script>
+    <link rel="stylesheet" href="/static/css/index.css">
+{% endblock %}
+
+
+{% block body %}
+    
+    <div class="whole-screen">
+        
+        <div class="post-container">
+            <div class="post-element1-container">
+                <input id="js-input-content" type="text" placeholder="How You Are Feeling Today!">
+            </div>
+            <div class="post-element2-container">
+                <button class="btn-post">Post</button>
+                
+            </div>   
+        </div>
+
+
+
+
+
+
+
+
+        <div class="suggested-people-container">
+            <div class="suggested-people-container2">
+                <div class="title-suggested-container">
+                    <p>Meet New People</p>
+                </div>
+                {% for user in users%}
+                {% if user.username not in filtered_names %}
+                <div class="suggested-people-container3">
+                    <div>
+                        <a href="{% url 'profile' user.username%}"><img id="suggested-people-profile" src="/medias/{{request.user.profile_image}}" alt=""></a>
+                    </div>
+                    <div>
+                        <p>{{user.first_name}} {{user.last_name}}</p>
+                        <p id="suggested-username">@{{user.username}}</p>
+                    </div>
+                    <div class="btn-follow-container">
+                        <button class="suggested-btn-followw">Follow</button>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <div class="view-all-container">
+                    <a href="">View all </a>
+                </div>
+                
+            </div>
+        </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <div class="all-posts-container1">
+            {% for post in allposts%}
+            <div class="comment-post-container">
+                <div class="all-posts-container2">
+               
+                    <div class="posts-top-container">
+                        <div class="image-container">
+                            <a href="{% url 'profile' post.username%}">
+                                <img id="post-profile-pic" src="/medias/{{request.user.profile_image}}" alt="" >
+                            </a>
+                                
+                            
+                            
+                            
+                    
+                    
+                        </div>
+                        <div class="names-container">
+                            <p id="full-name">{{post.first_name}} {{post.last_name}}</p>
+                            <p id="username">{{post.username}}</p>
+                        </div>
+                    </div>
+                    <div class="post-text-container">
+                        <p class="post-text">{{post.post}}</p>
+                    </div>
+                    <div class="buttons-post-container1">
+                        <div class="buttons-post-container2">
+                            <div id="like-container" class="btns-container">
+                        
+                                    {% if request.user in post.liked_users.all %}
+                                        <button class="img-like-button" id="btn-like-liked"></button>
+                                    {% else %}
+                                    <button class="img-like-button" id="btn-like-standard"></button>
+                                    {% endif %}
+                                <p id="like-count">0</p>
+                                <p id="post-id" hidden>{{post.id}}</p>
+                            </div>
+                            <div class="btns-container">
+                                {% if request.user in post.disliked_users.all %}
+                                <button class="img-dislike-button" id="btn-dislike-disliked"></button>
+                                {% else %}
+                                    <button class="img-dislike-button"  id="btn-dislike-standard"></button>
+                                {% endif %}
+                                <p id="dislike-count">0</p>
+                            </div>
+                            <div class="btns-container">
+                                <button class="img-icon-button" id="btn-comment"></button>
+                                <p id="comment-number">0</p>
+                            </div>
+                            <div class="btns-container">
+                                <button class="img-icon-button" id="btn-share"></button>
+                        
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="comment-container">
+                    <div class="js-comment-container">
+                        <div class="comment-user-names-container"></div>
+                        <div class="comment-input-container"></div>
+                        <div class="comment-btn-submit-container"></div>
+                    </div>
+                    
+                </div>
+                <div class="all-comments">
+                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+           
+            
+           
+       
+        
+        
+        
+        
+        
+    </div>
+    
+    
+{% endblock %}

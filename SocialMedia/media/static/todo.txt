@@ -1,0 +1,14 @@
+Todo: 
+
+1. Implement the follow
+2. Implement the like
+3. Implement the dislike
+
+
+If Time:
+ - Implement the comment
+
+
+To Do (Now):
+ - Continue the new users page
+ 
