@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector(".confirmation-sup-container").style.display = 'none';
     document.querySelector(".btn-post").style.display = 'none';
     document.querySelector("#js-input-content").addEventListener("keyup", function() {
         console.log("h")
@@ -20,13 +21,7 @@ document.addEventListener("DOMContentLoaded", function(){
         
         like_post(button)
     })})
-    document.querySelectorAll(".img-dislike-button").forEach((button) => {
-        getdisLikeCount(button)
-        button.addEventListener("click", function() {
-            
-            dislikePost(button)
-        })
-    })
+   
     document.querySelectorAll("#btn-comment").forEach((button) => {
         
         button.addEventListener("click", () => {
@@ -46,7 +41,58 @@ document.addEventListener("DOMContentLoaded", function(){
             
         })
     })
+
+    document.querySelectorAll("#btn-del-post").forEach((button) => {
+        button.addEventListener("click", function() {
+            document.querySelector(".confirmation-sup-container").style.display = 'block';
+            document.querySelector('.whole-screen').style.filter = 'blur(8px)'
+
+
+            document.querySelector("#conf-btn-del").addEventListener("click", function(){
+                deletePost(button)
+                
+    
+            })
+
+            document.querySelector(".whole-screen").style.pointerEvents = 'none';
+            document.querySelector("#conf-btn-cancel").addEventListener("click", function(){
+                 cancelPost(button)
+                })
+
+           
+        })
+    })
 })
+
+async function deletePost(button) {
+    // GETTING THE POST ID
+    const container = button.parentNode.parentNode.parentNode.parentNode
+    console.log(container)
+    const getResponse = await fetch(`/post/${container.querySelector("#post-id").innerHTML}`)
+    const post_id = await getResponse.json()
+    
+
+    // MAKING POST REQUEST TO DELETE THE POST
+    const postResponse = fetch(`/delete_post/${post_id}`, {
+        method: 'post',
+        body: {
+            'post_text': container.querySelector(".post-text").innerHTML 
+        }
+    })
+    console.log((await postResponse).status)
+    if ((await postResponse).status == 200) {
+        container.remove()
+        document.querySelector(".confirmation-sup-container").style.display = 'none';
+        document.querySelector('.whole-screen').style.filter = 'none';
+    }
+    
+}
+
+function cancelPost(button) {
+    document.querySelector(".confirmation-sup-container").style.display = 'none';
+    document.querySelector('.whole-screen').style.filter = 'none'
+    document.querySelector(".whole-screen").style.pointerEvents = 'auto';
+}
 
 const p = document.createElement('p')
 async function post_content() {
@@ -169,7 +215,7 @@ async function like_post(button) {
     changeDisLikeButtonColor(button, a.status)
     getdisLikeCount(button)
     */
-    revertDislike(button)
+   
    })
    
 
@@ -190,66 +236,13 @@ async function getLikeCount(button) {
 function changeLikeButtonColor(button, status) {
    
     if (status == 201) {
-        button.querySelector(".img-like-button").style.backgroundImage = "url('static/css/images/icon-like.png')"
+        console.log(button)
+        button.querySelector(".img-like-button").style.fill = '#ffffff'
     } else {
-        button.querySelector(".img-like-button").style.backgroundImage = "url('static/css/images/download.png')"
+        console.log(button)
+        button.querySelector(".img-like-button").style.fill = '#007bff'
     }
     
-}
-
-async function dislikePost(button) {
-    // Get the post details
-    const container = button.parentNode.parentNode.parentNode.parentNode
-
-   // Get the user
-   getCurrentUser().then(async function(response) {
-    // fetching the url
-    const postResponse = await fetch("/dislike_post", {
-        method: 'post',
-        body: JSON.stringify({
-            'current_user': response,
-            'id': container.querySelector("#post-id").innerHTML
-            
-        })
-        
-        
-        
-    })
-    const a = postResponse
-    
-    getdisLikeCount(button)
-    
-    
-    changeDisLikeButtonColor(container, a.status)
-    revertLike(button)
-   })
-}
-
-async function getdisLikeCount(button) {
-    const container = button.parentNode.parentNode.parentNode.parentNode
-    const postResponse = await fetch(`/dislike_count/${container.querySelector("#post-id").innerHTML}`)
-    let a = await postResponse.json()
-    const dislikeCount = JSON.parse(a)
-    
-    button.parentNode.parentNode.querySelector("#dislike-count").innerHTML = dislikeCount['count']
-    
-    
-    
-}
-
-function changeDisLikeButtonColor(button, status) {
-    
-    if (status == 201) {
-        button.querySelector(".img-dislike-button").style.backgroundImage = "url('static/css/images/dislike.png')"
-    } else {
-        button.querySelector(".img-dislike-button").style.backgroundImage = "url('static/css/images/dislike.jpeg')"
-    }
-}
-
-function revertDislike(button) {
-    const a = button.parentNode.parentNode
-    changeDisLikeButtonColor(a, 201)
-    getdisLikeCount(button)
 }
 
 function revertLike(button) {
@@ -260,7 +253,8 @@ function revertLike(button) {
 
 
 async function comment(button) {
-    const a = button.parentNode.parentNode.parentNode.parentNode.parentNode
+    const a = button.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
+    console.log(a)
     const userInput = document.createElement("input")
     const btnSubmit = document.createElement("button")
     const pUsername = document.createElement("p")
@@ -363,14 +357,14 @@ async function loadPostComments(container, num) {
         const pComment = document.createElement("p")
         const commentDiv = document.createElement("div")
         commentDiv.className = 'post-comment'
-
+       
         pUsername.innerHTML = response[0].user;
-        pComment.innerHTML = response[0].comment;
+        pComment.innerHTML = response.slice(-1)[0].comment;
         container.querySelector("#comment-number").innerHTML = response.length
         
         commentDiv.append(pUsername);
         commentDiv.append(pComment);
-
+        console.log(response)
         container.querySelector(".all-comments").append(commentDiv)
     }
 
@@ -418,3 +412,5 @@ async function suggested_unfollow(button) {
     button.style.backgroundColor = '#0080FF';
     button.innerHTML = 'Follow';
 }
+
+

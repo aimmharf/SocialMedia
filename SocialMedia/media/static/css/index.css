@@ -6,6 +6,7 @@ h1 {
 }
 body {
     background-color: #212121;
+    
 }
 
 p {
@@ -16,13 +17,65 @@ header {
     text-align: center;
 }
 
+.confirmation-sup-container {
+    
+    z-index: 3;
+    position: fixed;
+    top: 35%;
+    left: 35%;
+    width: 30vw;
+    height: 100vh;
+    
+   
+   
+}
+
+.confirmation-sup2-container {
+    background-color: white;
+    border-radius: 20px;
+    height: 30%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    
+}
+
+.confirmation-btn-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 7px;
+
+}
+
+#confirmation-text {
+    color: black;
+    font-size: 25px;
+    text-align: center;
+}
+
+#conf-btn-del {
+    background-color: red;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+}
+
+#conf-btn-cancel {
+    background-color: #0080FF;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+}
 .nav {
     position: fixed;
     top: 0px;
     height: 50%;
     width: 6%;
-    border: 1px solid #d3d3d3;
-    background-color: #f8f8f8;
+    border: 1px solid #060606;
+    background-color: #212121;
 }
 
 
@@ -113,7 +166,7 @@ header {
    
     height: 95vh;
     width: 95vw;
-   
+    
     
 
 }
@@ -217,9 +270,30 @@ header {
 .posts-top-container {
     display: grid;
     width: 100%;
-    grid-template-columns: 100px 200px;
+    grid-template-columns: 100px 200px auto;
     
     
+}
+
+.modify-post-container {
+    margin-top: 5px;
+    margin-right: 5px;
+    justify-self: end;
+}
+
+#btn-del-post {
+    background-color: red;
+    border: 0;
+    color: white;
+
+  
+}
+
+#btn-edit-post {
+    background-color: #0080FF;
+    color: white;
+    border: 0;
+    margin-left: 5px;
 }
 
 .post-text-container {
@@ -244,10 +318,10 @@ header {
     margin-bottom: 10px;
     display: grid;
     column-gap: 10px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
-    background-color: white;
+   
 }
 
 .img-icon-button, .img-like-button, .img-dislike-button {
@@ -277,14 +351,14 @@ header {
     margin: 0;
 }
 
-#btn-like-standard {
-    background-image: url("images/icon-like.png");
-    margin-left: 10px;
+
+
+#btn-like-standard:hover {
+    cursor: pointer;
 }
 
-#btn-like-liked {
-    background-image: url('images/download.png');
-    margin-left: 10px;
+#btn-like-liked:hover {
+    cursor: pointer;
 }
 
 #btn-dislike {
@@ -303,8 +377,8 @@ header {
 
 }
 
-#btn-comment {
-    background-image: url("images/comment.jpeg");
+#btn-comment:hover {
+   cursor: pointer;
 }
 
 #btn-share {

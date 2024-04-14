@@ -34,7 +34,7 @@ class Posts(models.Model):
     date = models.DateTimeField()
     post = models.TextField(null=False)
     liked_users = models.ManyToManyField(User, related_name='UserLiked', null=True,  default=None)
-    disliked_users = models.ManyToManyField(User, related_name='userDisliked', null=True, default=None)
+   
 
     
     def __str__(self):

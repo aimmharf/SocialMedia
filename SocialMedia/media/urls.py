@@ -18,10 +18,9 @@ urlpatterns = [
     #path("remove_follower", views.remove_follower, name='remove_follower'),
     path("like_post", views.like_post, name='postLike'),
     path("like_count/<int:id>", views.like_count, name='like_count'),
-    path("dislike_post", views.dislike_post, name='dislike_post'),
-    path("dislike_count/<int:id>", views.dislike_count, name='dislike_count'),
     path("get_user", views.get_user, name='getuser'),
-    path("comment/<int:id>", views.comment, name='commentUser')
-    
+    path("comment/<int:id>", views.comment, name='commentUser'),
+    path("post/<int:id>", views.get_id, name='id'),
+    path("delete_post/<int:id>", views.delete_post, name='delete_post')
     
 ]

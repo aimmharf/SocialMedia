@@ -321,8 +321,7 @@ def like_post(request):
             find_post.liked_users.remove(request.user)
             return HttpResponse(status=201)
         else:
-            if request.user in find_post.disliked_users.all():
-                find_post.disliked_users.remove(request.user)
+            
             # Adding a new like object and saving it
             new_like = Likes(user=request.user, post=find_post)
             new_like.save()
@@ -342,44 +341,7 @@ def like_count(request, id):
     # getting the count and returning a successfull response
     return JsonResponse(status=200, data=json.dumps({"count": str(all_likes)}), safe=False)
 
-@csrf_exempt
-def dislike_post(request):
-    # Check for request method
-    if request.method =='POST':
-        # load the json data from javascript
-        data = json.loads(request.body)
-        
-        # Finding the post 
-        find_post = Posts.objects.get(id=data['id'])
-        
-    
-        # CHECKING IF THE USER LIKED OR UNLIKED
-        if request.user in find_post.disliked_users.all():
-            
-            find_post.disliked_users.remove(request.user)
-            return HttpResponse(status=201)
-        
-        else:
-            if request.user in find_post.liked_users.all():
-                find_post.liked_users.remove(request.user)
-            # Adding a new like object and saving it
-            new_dislike = Likes(user=request.user, post=find_post)
-            new_dislike.save()
-        
-            find_post.disliked_users.add(request.user)
-            # Returning a successull response
-            return HttpResponse(status=200)
 
-@csrf_exempt
-def dislike_count(request, id):
-    # Getting the post from the database
-    posting = Posts.objects.get(id=id)
-    
-    # Getting the likes by filtering with post
-    all_dislikes = len(posting.disliked_users.all())
-    
-    # getting the count and returning a successfull response
-    return JsonResponse(status=200, data=json.dumps({"count": str(all_dislikes)}), safe=False)
 
 @csrf_exempt
 def get_user(request):
@@ -410,4 +372,16 @@ def comment(request, id):
             
 
         return JsonResponse(status=200, data=json_comments, safe=False)
+
+
+def get_id(request, id):
+    post = Posts.objects.get(id=id)
+    return JsonResponse(data=post.id, status=200, safe=False)
+
+@csrf_exempt
+def delete_post(request, id):
+    if request.method == 'POST':
+        post = Posts.objects.get(id=id)
+        Posts.delete(post)
+        return JsonResponse(status=200, data="Deleted Successfully", safe=False)
     

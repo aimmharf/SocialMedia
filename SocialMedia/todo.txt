@@ -1,0 +1,5 @@
+
+1. Implement: 
+    - users can edit or delete there posts
+    - index page should display only posts of the people who the user is following
+    - make a page where it has all users posts
