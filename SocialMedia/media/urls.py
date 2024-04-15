@@ -21,6 +21,8 @@ urlpatterns = [
     path("get_user", views.get_user, name='getuser'),
     path("comment/<int:id>", views.comment, name='commentUser'),
     path("post/<int:id>", views.get_id, name='id'),
-    path("delete_post/<int:id>", views.delete_post, name='delete_post')
+    path("delete_post/<int:id>", views.delete_post, name='delete_post'),
+    path("edit_post/<int:id>", views.edit_post, name='edit_post')
+    
     
 ]

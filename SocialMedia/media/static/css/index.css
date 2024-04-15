@@ -17,6 +17,10 @@ header {
     text-align: center;
 }
 
+.edit-post-text {
+    display: none;
+}
+
 .confirmation-sup-container {
     
     z-index: 3;
@@ -545,3 +549,28 @@ header {
     color: black;
 }
 
+#btn-edit-post-submit {
+    color: white;
+    background-color: #00994C;
+    border: 0;
+    border-radius: 5px;
+
+}
+
+#btn-edit-cancel {
+    background-color: #FF3333;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+}
+
+
+
+#edit-text:focus {
+    outline: 0;
+
+}
+#edit-text {
+    border: 0;
+    border-radius: 7px;
+}

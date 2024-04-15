@@ -384,4 +384,13 @@ def delete_post(request, id):
         post = Posts.objects.get(id=id)
         Posts.delete(post)
         return JsonResponse(status=200, data="Deleted Successfully", safe=False)
-    
+
+
+@csrf_exempt
+def edit_post(request, id):
+    if request.method =='POST':
+        post = Posts.objects.get(id=id)
+        data = json.loads(request.body)
+        post.post = data['content']
+        post.save()
+        return JsonResponse(status=200, safe=False, data='Successfull')

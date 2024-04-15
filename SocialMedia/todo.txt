@@ -1,5 +1,14 @@
 
 1. Implement: 
-    - users can edit or delete there posts
+    - users can edit there posts
     - index page should display only posts of the people who the user is following
     - make a page where it has all users posts
+    - add the date of each post and each comment of the user
+
+
+Log 4/14/23:
+ - Finished the delete post implementation
+ - Started the edit post implementation
+
+ - Stoped At:
+    - submit button for user editing post

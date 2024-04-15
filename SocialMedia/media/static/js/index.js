@@ -62,7 +62,49 @@ document.addEventListener("DOMContentLoaded", function(){
            
         })
     })
+
+    document.querySelectorAll("#btn-edit-post").forEach((button) =>{
+        button.addEventListener("click", function() {
+            editPost(button)
+        })
+    })
 })
+
+
+async function editPost(button) {
+    const container = button.parentNode.parentNode.parentNode
+    console.log(container)
+    container.querySelector(".edit-post-text").style.display = 'block';
+    container.querySelector("#edit-text").value = container.querySelector(".post-text").innerHTML
+   
+    container.querySelector(".post-text").style.display = 'none';
+    
+    // WAITING FOR USER TO SUBMIT
+    document.querySelector("#btn-edit-post-submit").addEventListener("click", async function() {
+        const content = document.querySelector("#edit-text").value
+        const response = await fetch(`/edit_post/${container.querySelector("#post-id").innerHTML}`, {
+            method: 'post',
+            body: JSON.stringify({
+                "content": content,
+            })
+        })
+        if ((await response).status == 200) {
+            document.querySelector(".post-text").innerHTML = content
+            document.querySelector(".edit-post-text").style.display = 'none';
+            document.querySelector(".post-text").style.display = 'block';
+        
+        }
+
+
+
+    })
+
+    document.querySelector("#btn-edit-cancel").addEventListener("click", function(){
+        document.querySelector(".edit-post-text").style.display = 'none';
+        document.querySelector(".post-text").style.display = 'block';
+    })
+}
+
 
 async function deletePost(button) {
     // GETTING THE POST ID
