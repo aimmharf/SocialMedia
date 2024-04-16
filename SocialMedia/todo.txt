@@ -6,9 +6,23 @@
     - add the date of each post and each comment of the user
 
 
-Log 4/14/23:
- - Finished the delete post implementation
- - Started the edit post implementation
+Log 4/15/24:
+ - Finished the edit post implementation
+ - Added date for each post
+ - Only people who the user is following is in the homepage
+ - tweaked the layout 
 
- - Stoped At:
-    - submit button for user editing post
+ Stoped At:
+    - There is a bug when editing a post
+    - Start Implementing the explore page
+
+
+
+Log 4/16/24:
+- fixed some bugs and tweaked homepage
+- fixed some bugs in new users page
+- Started Implementing explore page
+
+Stop At:
+    - Finish implementation of explore page
+    - Implement a 'coming soon page for every feature not added yet'

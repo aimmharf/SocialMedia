@@ -9,6 +9,7 @@ urlpatterns = [
     path("newpost", views.new_posts, name='newposts'),
     path("profile/<str:username>", views.user_profile, name='profile'),
     path("newuser", views.new_user, name='newuser'),
+    path("explore", views.explore, name='explore'),
     
     # Api requests
     path("post_api", views.post_api, name='post_api'),

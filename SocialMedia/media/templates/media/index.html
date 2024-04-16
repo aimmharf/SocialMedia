@@ -36,7 +36,7 @@
                 {% if user.username not in filtered_names %}
                 <div class="suggested-people-container3">
                     <div>
-                        <a href="{% url 'profile' user.username%}"><img id="suggested-people-profile" src="/medias/{{request.user.profile_image}}" alt=""></a>
+                        <a href="{% url 'profile' user.username%}"><img id="suggested-people-profile" src="/medias/{{user.profile_image}}" alt=""></a>
                     </div>
                     <div>
                         <p>{{user.first_name}} {{user.last_name}}</p>
@@ -69,14 +69,14 @@
 
 
        <div class="all-posts-container1">
-            {% for post in allposts%}
+            {% for post in all_following %}
             <div class="comment-post-container">
                 <div class="all-posts-container2">
                
                     <div class="posts-top-container">
                         <div class="image-container">
                             <a href="{% url 'profile' post.username%}">
-                                <img id="post-profile-pic" src="/medias/{{request.user.profile_image}}" alt="" >
+                                <img id="post-profile-pic" src="/medias/{{post.user.profile_image}}" alt="" >
                             </a>
                     
                         </div>
@@ -123,6 +123,8 @@
                                 <p id="like-count">0</p>
                                 <p id="post-id" hidden>{{post.id}}</p>
                             </div>
+
+                            
                            
                             <div class="btns-container">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -137,6 +139,10 @@
                             <div class="btns-container">
                                 <button class="img-icon-button" id="btn-share"></button>
                         
+                            </div>
+
+                            <div class="post-date-container">
+                                <p>Posted On: {{post.date.month}}/{{post.date.day}}/{{post.date.year}} </p>
                             </div>
                         </div>
                     </div>

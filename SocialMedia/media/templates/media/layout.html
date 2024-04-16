@@ -17,9 +17,17 @@
   </header>
     <div class="nav">
       <div class="nav-container">
-        <div class="home-nav-container"><a href="{% url 'index' %}"><button id="btn-home">Home</button></a></div>
+        <div class="home-nav-container">
+          <a href="{% url 'index' %}"><button id="btn-home">Home</button></a>
+        </div>
         <div class="home-message-container">
           <button id="btn-message"></button>
+        </div>
+        <div class="home-explore-container">
+          
+          <a href="{% url 'explore' %}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" width="35" height="35">
+            <path fill="#ffffff" d="M29.68 27.07L22.61 20a10.7 10.7 0 1 0-2.54 2.54l7.07 7.07c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41zM12.7 21.7A8.7 8.7 0 1 1 21.3 13a8.7 8.7 0 0 1-8.6 8.7z"/>
+          </svg></a>
         </div>
         <div class="profile-nav-container">
           <a href="{% url 'profile' username=request.user.username %}">

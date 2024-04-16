@@ -1,0 +1,19 @@
+{% extends 'media/layout.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/explore.css">
+{% endblock %}
+
+{% block body %}
+    <header>
+        <input type="text" placeholder="Search for users or posts">
+    </header>
+    <div class="super-container">
+        <div class="users-profile-container">
+            <p>Users</p>
+        </div>
+        <div class="users-post-container">
+            <p>Posts</p>
+        </div>
+    </div>
+{% endblock %}

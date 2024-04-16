@@ -126,6 +126,7 @@ async function deletePost(button) {
         container.remove()
         document.querySelector(".confirmation-sup-container").style.display = 'none';
         document.querySelector('.whole-screen').style.filter = 'none';
+        document.querySelector(".whole-screen").style.pointerEvents = 'auto';
     }
     
 }
@@ -377,17 +378,34 @@ async function loadPostComments(container, num) {
             const pUsername = document.createElement("p")
             const pComment = document.createElement("p")
             const commentDiv = document.createElement("div")
+            const contentDiv = document.createElement("div")
+            const profilePicImgDiv = document.createElement("div")
+            const profilePicImg = document.createElement("img")
+            profilePicImg.setAttribute("src", `../medias/${response[i].img_url}`)
+            profilePicImg.style.height = '90px';
+            profilePicImg.style.width = '80px'
             commentDiv.className = 'post-comment'
+            contentDiv.className = 'post-comment-content'
+            profilePicImgDiv.className = 'post-comment-img'
+            
 
             pUsername.innerHTML = response[i].user;
             pComment.innerHTML = response[i].comment;
             container.querySelector("#comment-number").innerHTML = response.length
-        
-            commentDiv.append(pUsername);
-            commentDiv.append(pComment);
+            
+            contentDiv.append(pUsername)
+            contentDiv.append(pComment)
+
+            profilePicImgDiv.append(profilePicImg)
+
+            commentDiv.append(profilePicImgDiv)
+            commentDiv.append(contentDiv)
+            
+           
+            
 
             container.querySelector(".all-comments").append(commentDiv)
-
+        console.log((await response))
 
     }
     
@@ -398,15 +416,30 @@ async function loadPostComments(container, num) {
         const pUsername = document.createElement("p")
         const pComment = document.createElement("p")
         const commentDiv = document.createElement("div")
+        const contentDiv = document.createElement("div")
+        const profilePicImgDiv = document.createElement("div")
+        const profilePicImg = document.createElement("img")
+        profilePicImg.setAttribute("src", `../medias/${response[0].img_url}`)
+        profilePicImg.style.height = '90px';
+        profilePicImg.style.width = '80px'
         commentDiv.className = 'post-comment'
-       
+        contentDiv.className = 'post-comment-content'
+        profilePicImgDiv.className = 'post-comment-img'
+            
+
+        commentDiv.className = 'post-comment'
+        
         pUsername.innerHTML = response[0].user;
         pComment.innerHTML = response.slice(-1)[0].comment;
         container.querySelector("#comment-number").innerHTML = response.length
         
-        commentDiv.append(pUsername);
-        commentDiv.append(pComment);
-        console.log(response)
+        contentDiv.append(pUsername)
+        contentDiv.append(pComment)
+
+        profilePicImgDiv.append(profilePicImg)
+
+        commentDiv.append(profilePicImgDiv)
+        commentDiv.append(contentDiv)
         container.querySelector(".all-comments").append(commentDiv)
     }
 

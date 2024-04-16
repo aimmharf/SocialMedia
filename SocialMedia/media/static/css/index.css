@@ -85,16 +85,17 @@ header {
 
 .nav-container{
    
-   display: grid;
-   grid-template-rows: 1fr 1fr 1fr 1fr;
+   position: absolute;
+   top: 10%;
+   height: 100%;
    width: 100%;
-   align-items: end;
-   justify-content: center;
-  
+    
 }
 
 .home-logout-container {
-    align-self: center;
+    position: absolute;
+    top:370px;
+    width: 100%;
 }
 
 .home-logout-container button a {
@@ -103,6 +104,7 @@ header {
     background-color: #FF3333;
 }
 .home-logout-container button {
+    width: 100%;
     background-color: #FF3333;
     border: 0;
     border-radius: 10px;
@@ -123,12 +125,26 @@ header {
     box-shadow: 1px 1px 7px;
 }
 .home-nav-container {
-    align-self: self-start;
+    position: absolute;
+    top: -30px;
+    left: 25px;
 }
 
+.home-explore-container {
+    position: absolute;
+    top: 110px;
+    left: 35px;
+}
+
+.profile-nav-container {
+    position: absolute;
+    top: 190px;
+    left:10px;
+}
 .home-message-container {
-    align-self: center;
-    justify-self: center;
+    position: absolute;
+    top: 20px;
+    left: 25px;
 }
 
 #btn-layout-profile {
@@ -322,10 +338,20 @@ header {
     margin-bottom: 10px;
     display: grid;
     column-gap: 10px;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
    
+}
+
+.post-date-container {
+    display: grid;
+    justify-content: center;
+    align-items: end;
+}
+
+.post-date-container p {
+    margin: 0;
 }
 
 .img-icon-button, .img-like-button, .img-dislike-button {
@@ -534,10 +560,21 @@ header {
 .post-comment{
     display: grid;
     justify-content: center;
-    border: 1px solid #202020;
-    background-color: #202020;
+    grid-template-columns: auto 1fr;
+    
+    background-color: #343434;
+    border-radius: 15px;
+
 }
 
+.post-comment-content {
+    display: grid;
+    justify-content: center;
+}
+
+.post-comment-img img {
+    border-radius: 45px;
+}
 
 
 .comment-post-container {

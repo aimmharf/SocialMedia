@@ -34,6 +34,7 @@ class Posts(models.Model):
     date = models.DateTimeField()
     post = models.TextField(null=False)
     liked_users = models.ManyToManyField(User, related_name='UserLiked', null=True,  default=None)
+    user = models.ForeignKey(User, related_name='userPost', on_delete=models.CASCADE, null=True)
    
 
     

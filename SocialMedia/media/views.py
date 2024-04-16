@@ -33,14 +33,23 @@ def index(request):
     all_users_filterd = Follow.objects.filter(userf=request.user)
     for names in all_users_filterd:
         filterd_names.append(names.user.username)
-    print(filterd_names)
+   
     
     
-    for post in Posts.objects.all():
-        print(post.liked_users.all())
+    
 
+
+    # GET POSTS THAT THE USER IS FOLLOWING
+    all_users_following = []
+    current_user = User.objects.get(username=request.user.username)
+    followings = Follow.objects.filter(userf=current_user)
+    for user in followings:
+        post = Posts.objects.filter(username=user.user.username)
+        for a in post:
+            all_users_following.append(a)
+    
     return render(
-        request, "media/index.html", {"allposts": all_posts, "id": request.user, "allLikes": allLikes, "users": all_users, "filtered_names": filterd_names}
+        request, "media/index.html", {"allposts": all_posts, "id": request.user, "allLikes": allLikes, "users": all_users, "filtered_names": filterd_names, "all_following": all_users_following}
     )
 
 
@@ -48,7 +57,7 @@ def new_user(request):
     user = User.objects.get(username=request.user.username)
     if request.user.is_authenticated and user.times_loggin_in == 1:
         if request.method == 'POST':
-            img_url = request.POST['profile_img_url']
+            img_url = request.FILES['profile_img_url']
             username = request.POST['new_username']
             first_name = request.POST['new_first_name']
             last_name = request.POST['new_last_name']
@@ -224,6 +233,7 @@ def new_posts(request):
             username=request.user.username,
             post=post,
             date=datetime.datetime.now(),
+            user=request.user
         )
 
         new_post.save()
@@ -232,6 +242,8 @@ def new_posts(request):
 
     return render(request, "media/newpost.html")
 
+def explore(request):
+    return render(request, "media/explore.html")
 
 
 # API'S
@@ -250,6 +262,7 @@ def post_api(request):
             username=request.user.username,
             date=datetime.datetime.now(),
             post=data["Post"],
+            user=request.user
         )
         new_post.save()
         
@@ -367,7 +380,8 @@ def comment(request, id):
             json_comments.append({
                 "comment":comment.comment,
                 "user": comment.user.username,
-                "post": comment.post.post
+                "post": comment.post.post,
+                "img_url": str(comment.user.profile_image)
             })
             
 
