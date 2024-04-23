@@ -9,6 +9,7 @@ urlpatterns = [
     path("newpost", views.new_posts, name='newposts'),
     path("profile/<str:username>", views.user_profile, name='profile'),
     path("newuser", views.new_user, name='newuser'),
+    path("explore", views.explore, name='explore'),
     
     # Api requests
     path("post_api", views.post_api, name='post_api'),
@@ -18,10 +19,14 @@ urlpatterns = [
     #path("remove_follower", views.remove_follower, name='remove_follower'),
     path("like_post", views.like_post, name='postLike'),
     path("like_count/<int:id>", views.like_count, name='like_count'),
-    path("dislike_post", views.dislike_post, name='dislike_post'),
-    path("dislike_count/<int:id>", views.dislike_count, name='dislike_count'),
     path("get_user", views.get_user, name='getuser'),
-    path("comment/<int:id>", views.comment, name='commentUser')
+    path("comment/<int:id>", views.comment, name='commentUser'),
+    path("post/<int:id>", views.get_id, name='id'),
+    path("delete_post/<int:id>", views.delete_post, name='delete_post'),
+    path("edit_post/<int:id>", views.edit_post, name='edit_post'),
+    path("search_users", views.search_users, name='search_users'),
+    path("is_following/<str:current_user>/<str:user>", views.isFollowing, name='is_following')
+
     
     
 ]

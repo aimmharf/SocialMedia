@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector(".confirmation-sup-container").style.display = 'none';
     document.querySelector(".btn-post").style.display = 'none';
     document.querySelector("#js-input-content").addEventListener("keyup", function() {
         console.log("h")
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(){
     })
 
     document.querySelector(".btn-post").addEventListener("click", post_content)
+    
     document.querySelectorAll(".img-like-button").forEach((button) => {
         getLikeCount(button)
        
@@ -20,13 +22,7 @@ document.addEventListener("DOMContentLoaded", function(){
         
         like_post(button)
     })})
-    document.querySelectorAll(".img-dislike-button").forEach((button) => {
-        getdisLikeCount(button)
-        button.addEventListener("click", function() {
-            
-            dislikePost(button)
-        })
-    })
+   
     document.querySelectorAll("#btn-comment").forEach((button) => {
         
         button.addEventListener("click", () => {
@@ -46,7 +42,101 @@ document.addEventListener("DOMContentLoaded", function(){
             
         })
     })
+
+    document.querySelectorAll("#btn-del-post").forEach((button) => {
+        button.addEventListener("click", function() {
+            document.querySelector(".confirmation-sup-container").style.display = 'block';
+            document.querySelector('.whole-screen').style.filter = 'blur(8px)'
+
+
+            document.querySelector("#conf-btn-del").addEventListener("click", function(){
+                deletePost(button)
+                
+    
+            })
+
+            document.querySelector(".whole-screen").style.pointerEvents = 'none';
+            document.querySelector("#conf-btn-cancel").addEventListener("click", function(){
+                 cancelPost(button)
+                })
+
+           
+        })
+    })
+
+    document.querySelectorAll("#btn-edit-post").forEach((button) =>{
+        button.addEventListener("click", function() {
+            editPost(button)
+        })
+    })
 })
+
+
+async function editPost(button) {
+    const container = button.parentNode.parentNode.parentNode
+    console.log(container)
+    container.querySelector(".edit-post-text").style.display = 'block';
+    container.querySelector("#edit-text").value = container.querySelector(".post-text").innerHTML
+   
+    container.querySelector(".post-text").style.display = 'none';
+    
+    // WAITING FOR USER TO SUBMIT
+    document.querySelector("#btn-edit-post-submit").addEventListener("click", async function() {
+        const content = document.querySelector("#edit-text").value
+        const response = await fetch(`/edit_post/${container.querySelector("#post-id").innerHTML}`, {
+            method: 'post',
+            body: JSON.stringify({
+                "content": content,
+            })
+        })
+        if ((await response).status == 200) {
+            document.querySelector(".post-text").innerHTML = content
+            document.querySelector(".edit-post-text").style.display = 'none';
+            document.querySelector(".post-text").style.display = 'block';
+        
+        }
+
+
+
+    })
+
+    document.querySelector("#btn-edit-cancel").addEventListener("click", function(){
+        document.querySelector(".edit-post-text").style.display = 'none';
+        document.querySelector(".post-text").style.display = 'block';
+    })
+}
+
+
+async function deletePost(button) {
+    // GETTING THE POST ID
+    const container = button.parentNode.parentNode.parentNode.parentNode
+    console.log(container)
+    const getResponse = await fetch(`/post/${container.querySelector("#post-id").innerHTML}`)
+    const post_id = await getResponse.json()
+    
+
+    // MAKING POST REQUEST TO DELETE THE POST
+    const postResponse = fetch(`/delete_post/${post_id}`, {
+        method: 'post',
+        body: {
+            'post_text': container.querySelector(".post-text").innerHTML 
+        }
+    })
+    console.log((await postResponse).status)
+    if ((await postResponse).status == 200) {
+        container.remove()
+        document.querySelector(".confirmation-sup-container").style.display = 'none';
+        document.querySelector('.whole-screen').style.filter = 'none';
+        document.querySelector(".whole-screen").style.pointerEvents = 'auto';
+    }
+    
+}
+
+function cancelPost(button) {
+    document.querySelector(".confirmation-sup-container").style.display = 'none';
+    document.querySelector('.whole-screen').style.filter = 'none'
+    document.querySelector(".whole-screen").style.pointerEvents = 'auto';
+}
 
 const p = document.createElement('p')
 async function post_content() {
@@ -169,7 +259,7 @@ async function like_post(button) {
     changeDisLikeButtonColor(button, a.status)
     getdisLikeCount(button)
     */
-    revertDislike(button)
+   
    })
    
 
@@ -190,66 +280,13 @@ async function getLikeCount(button) {
 function changeLikeButtonColor(button, status) {
    
     if (status == 201) {
-        button.querySelector(".img-like-button").style.backgroundImage = "url('static/css/images/icon-like.png')"
+        console.log(button)
+        button.querySelector(".img-like-button").style.fill = '#ffffff'
     } else {
-        button.querySelector(".img-like-button").style.backgroundImage = "url('static/css/images/download.png')"
+        console.log(button)
+        button.querySelector(".img-like-button").style.fill = '#007bff'
     }
     
-}
-
-async function dislikePost(button) {
-    // Get the post details
-    const container = button.parentNode.parentNode.parentNode.parentNode
-
-   // Get the user
-   getCurrentUser().then(async function(response) {
-    // fetching the url
-    const postResponse = await fetch("/dislike_post", {
-        method: 'post',
-        body: JSON.stringify({
-            'current_user': response,
-            'id': container.querySelector("#post-id").innerHTML
-            
-        })
-        
-        
-        
-    })
-    const a = postResponse
-    
-    getdisLikeCount(button)
-    
-    
-    changeDisLikeButtonColor(container, a.status)
-    revertLike(button)
-   })
-}
-
-async function getdisLikeCount(button) {
-    const container = button.parentNode.parentNode.parentNode.parentNode
-    const postResponse = await fetch(`/dislike_count/${container.querySelector("#post-id").innerHTML}`)
-    let a = await postResponse.json()
-    const dislikeCount = JSON.parse(a)
-    
-    button.parentNode.parentNode.querySelector("#dislike-count").innerHTML = dislikeCount['count']
-    
-    
-    
-}
-
-function changeDisLikeButtonColor(button, status) {
-    
-    if (status == 201) {
-        button.querySelector(".img-dislike-button").style.backgroundImage = "url('static/css/images/dislike.png')"
-    } else {
-        button.querySelector(".img-dislike-button").style.backgroundImage = "url('static/css/images/dislike.jpeg')"
-    }
-}
-
-function revertDislike(button) {
-    const a = button.parentNode.parentNode
-    changeDisLikeButtonColor(a, 201)
-    getdisLikeCount(button)
 }
 
 function revertLike(button) {
@@ -260,7 +297,8 @@ function revertLike(button) {
 
 
 async function comment(button) {
-    const a = button.parentNode.parentNode.parentNode.parentNode.parentNode
+    const a = button.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
+    console.log(a)
     const userInput = document.createElement("input")
     const btnSubmit = document.createElement("button")
     const pUsername = document.createElement("p")
@@ -287,7 +325,10 @@ async function comment(button) {
     // STYLING
     a.style.display = 'grid';
     a.style.gridRowGap = '20px';
-    a.querySelector(".comment-container").style.display = 'grid'
+    a.querySelector(".comment-container").style.display = 'grid';
+    a.querySelector(".js-comment-container").style.border = '1px solid #212121';
+    a.querySelector(".js-comment-container").style.gridRowGap = '10px';
+    
     button.disabled = true
 
     
@@ -341,17 +382,34 @@ async function loadPostComments(container, num) {
             const pUsername = document.createElement("p")
             const pComment = document.createElement("p")
             const commentDiv = document.createElement("div")
+            const contentDiv = document.createElement("div")
+            const profilePicImgDiv = document.createElement("div")
+            const profilePicImg = document.createElement("img")
+            profilePicImg.setAttribute("src", `../medias/${response[i].img_url}`)
+            profilePicImg.style.height = '90px';
+            profilePicImg.style.width = '80px'
             commentDiv.className = 'post-comment'
+            contentDiv.className = 'post-comment-content'
+            profilePicImgDiv.className = 'post-comment-img'
+            
 
             pUsername.innerHTML = response[i].user;
             pComment.innerHTML = response[i].comment;
             container.querySelector("#comment-number").innerHTML = response.length
-        
-            commentDiv.append(pUsername);
-            commentDiv.append(pComment);
+            
+            contentDiv.append(pUsername)
+            contentDiv.append(pComment)
+
+            profilePicImgDiv.append(profilePicImg)
+
+            commentDiv.append(profilePicImgDiv)
+            commentDiv.append(contentDiv)
+            
+           
+            
 
             container.querySelector(".all-comments").append(commentDiv)
-
+        console.log((await response))
 
     }
     
@@ -362,15 +420,30 @@ async function loadPostComments(container, num) {
         const pUsername = document.createElement("p")
         const pComment = document.createElement("p")
         const commentDiv = document.createElement("div")
+        const contentDiv = document.createElement("div")
+        const profilePicImgDiv = document.createElement("div")
+        const profilePicImg = document.createElement("img")
+        profilePicImg.setAttribute("src", `../medias/${response[0].img_url}`)
+        profilePicImg.style.height = '90px';
+        profilePicImg.style.width = '80px'
         commentDiv.className = 'post-comment'
+        contentDiv.className = 'post-comment-content'
+        profilePicImgDiv.className = 'post-comment-img'
+            
 
+        commentDiv.className = 'post-comment'
+        
         pUsername.innerHTML = response[0].user;
-        pComment.innerHTML = response[0].comment;
+        pComment.innerHTML = response.slice(-1)[0].comment;
         container.querySelector("#comment-number").innerHTML = response.length
         
-        commentDiv.append(pUsername);
-        commentDiv.append(pComment);
+        contentDiv.append(pUsername)
+        contentDiv.append(pComment)
 
+        profilePicImgDiv.append(profilePicImg)
+
+        commentDiv.append(profilePicImgDiv)
+        commentDiv.append(contentDiv)
         container.querySelector(".all-comments").append(commentDiv)
     }
 
@@ -418,3 +491,5 @@ async function suggested_unfollow(button) {
     button.style.backgroundColor = '#0080FF';
     button.innerHTML = 'Follow';
 }
+
+

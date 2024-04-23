@@ -1,0 +1,56 @@
+
+1. Implement: 
+    - users can edit there posts
+    - index page should display only posts of the people who the user is following
+    - make a page where it has all users posts
+    - add the date of each post and each comment of the user
+
+
+Log 4/15/24:
+ - Finished the edit post implementation
+ - Added date for each post
+ - Only people who the user is following is in the homepage
+ - tweaked the layout 
+
+ Stoped At:
+    - There is a bug when editing a post
+    - Start Implementing the explore page
+
+
+
+Log 4/16/24:
+- fixed some bugs and tweaked homepage
+- fixed some bugs in new users page
+- Started Implementing explore page
+
+Stop At:
+    - Finish implementation of explore page
+    - Implement a 'coming soon page for every feature not added yet'
+
+
+
+
+
+
+
+Log 4/20/24:
+- continued implementation of explore page (almost done it)
+- added correct link to 'view all' in home page
+
+ToDo Tommorow:
+- Finish implementing the explore page
+- Start working on posts on the profile page
+- IF TIME: start working on mobile resonsiveness
+
+
+
+Log 4/22/24
+
+- finished explore page
+- worked on a few bugs
+
+ToDO Tommorow:
+ - Make mobile responsive
+ - finish profile posts
+ - fix bugs
+ - push final version to github

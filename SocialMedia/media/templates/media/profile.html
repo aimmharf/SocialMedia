@@ -11,7 +11,7 @@
     <div class="whole-page-container">
         <div class="top-container">
             <div class="image-profile-container">
-                <img src="/medias/{{request.user.profile_image}}" alt="">
+                <img src="/medias/{{id.profile_image}}" alt="">
             </div>
             <div class="names-profile-container">
                 <div class="names-profile-container1">
@@ -54,11 +54,6 @@
                 <div class="username-prof-post-container"><p>{{post.username}}</p></div>
                 <div class="post-prof-text-container">
                     <p>{{post.post}}</p>
-                </div>
-                <div class="views-profile-container">
-                    <p>views</p>
-                    <p>Likes</p>
-                    <p>Dislikes</p>
                 </div>
                 <div class="date-container">
                     <p>Posted On: {{post.date}}</p>

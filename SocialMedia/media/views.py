@@ -33,14 +33,26 @@ def index(request):
     all_users_filterd = Follow.objects.filter(userf=request.user)
     for names in all_users_filterd:
         filterd_names.append(names.user.username)
-    print(filterd_names)
+   
+    filterd_names.append(request.user.username)
     
-    
-    for post in Posts.objects.all():
-        print(post.liked_users.all())
 
+
+    # GET POSTS THAT THE USER IS FOLLOWING
+    all_users_following = []
+    current_user = User.objects.get(username=request.user.username)
+    followings = Follow.objects.filter(userf=current_user)
+    my_posts = Posts.objects.filter(user=request.user)
+    for myp in my_posts:
+        print(myp)
+        all_users_following.append(myp)
+    for user in followings:
+        post = Posts.objects.filter(username=user.user.username)
+        for a in post:
+            all_users_following.append(a)
+    
     return render(
-        request, "media/index.html", {"allposts": all_posts, "id": request.user, "allLikes": allLikes, "users": all_users, "filtered_names": filterd_names}
+        request, "media/index.html", {"allposts": all_posts, "id": request.user, "allLikes": allLikes, "users": all_users, "filtered_names": filterd_names, "all_following": all_users_following}
     )
 
 
@@ -48,7 +60,7 @@ def new_user(request):
     user = User.objects.get(username=request.user.username)
     if request.user.is_authenticated and user.times_loggin_in == 1:
         if request.method == 'POST':
-            img_url = request.POST['profile_img_url']
+            img_url = request.FILES['profile_img_url']
             username = request.POST['new_username']
             first_name = request.POST['new_first_name']
             last_name = request.POST['new_last_name']
@@ -87,7 +99,7 @@ def user_profile(request, username):
     if len(check_if_following) > 0:
         is_following = True
         
-        
+
     # Check how many followers the user of the page has
     followers_count = Follow.objects.filter(user=id)
     
@@ -224,6 +236,7 @@ def new_posts(request):
             username=request.user.username,
             post=post,
             date=datetime.datetime.now(),
+            user=request.user
         )
 
         new_post.save()
@@ -232,6 +245,31 @@ def new_posts(request):
 
     return render(request, "media/newpost.html")
 
+def explore(request):
+    all_posts = Posts.objects.all().exclude(user=request.user)
+    all_users = User.objects.all()
+
+    # FILTER OUT ALL USERS THAT THE CURRENT USER IS NOT FOLLOWING
+    lis_of_follings = []
+
+    f = Follow.objects.filter(userf=request.user)
+    for p in f:
+        lis_of_follings.append(p.user.id)
+    lis_of_follings.append(request.user.id)
+    users = User.objects.all().exclude(pk__in=lis_of_follings)
+
+    user_followings = Follow.objects.filter(userf=request.user)
+    followings_usernames = []
+    for i in user_followings:
+        followings_usernames.append(i.user.username)
+    
+
+
+    return render(request, "media/explore.html", {
+        "all_posts":all_posts,
+        "all_users":users,
+        "followings_username": followings_usernames,
+    })
 
 
 # API'S
@@ -250,6 +288,7 @@ def post_api(request):
             username=request.user.username,
             date=datetime.datetime.now(),
             post=data["Post"],
+            user=request.user
         )
         new_post.save()
         
@@ -282,7 +321,7 @@ def current_user(request):
 def follow(request):
     # Loading the data sent from javascript
     data = json.loads(request.body)
-
+    print(data)
     # Getting the current user
     userf = User.objects.get(username=data["current_user"])
     print(data['user_being_followed'])
@@ -300,6 +339,7 @@ def follow(request):
     else:
         remove_follow = Follow.objects.get(user=user, userf=userf)
         remove_follow.delete()
+        
     
         # Returning a successfull json response 
         return JsonResponse(data='Unfollowed user', status=200, safe=False)
@@ -321,8 +361,7 @@ def like_post(request):
             find_post.liked_users.remove(request.user)
             return HttpResponse(status=201)
         else:
-            if request.user in find_post.disliked_users.all():
-                find_post.disliked_users.remove(request.user)
+            
             # Adding a new like object and saving it
             new_like = Likes(user=request.user, post=find_post)
             new_like.save()
@@ -342,44 +381,7 @@ def like_count(request, id):
     # getting the count and returning a successfull response
     return JsonResponse(status=200, data=json.dumps({"count": str(all_likes)}), safe=False)
 
-@csrf_exempt
-def dislike_post(request):
-    # Check for request method
-    if request.method =='POST':
-        # load the json data from javascript
-        data = json.loads(request.body)
-        
-        # Finding the post 
-        find_post = Posts.objects.get(id=data['id'])
-        
-    
-        # CHECKING IF THE USER LIKED OR UNLIKED
-        if request.user in find_post.disliked_users.all():
-            
-            find_post.disliked_users.remove(request.user)
-            return HttpResponse(status=201)
-        
-        else:
-            if request.user in find_post.liked_users.all():
-                find_post.liked_users.remove(request.user)
-            # Adding a new like object and saving it
-            new_dislike = Likes(user=request.user, post=find_post)
-            new_dislike.save()
-        
-            find_post.disliked_users.add(request.user)
-            # Returning a successull response
-            return HttpResponse(status=200)
 
-@csrf_exempt
-def dislike_count(request, id):
-    # Getting the post from the database
-    posting = Posts.objects.get(id=id)
-    
-    # Getting the likes by filtering with post
-    all_dislikes = len(posting.disliked_users.all())
-    
-    # getting the count and returning a successfull response
-    return JsonResponse(status=200, data=json.dumps({"count": str(all_dislikes)}), safe=False)
 
 @csrf_exempt
 def get_user(request):
@@ -405,9 +407,70 @@ def comment(request, id):
             json_comments.append({
                 "comment":comment.comment,
                 "user": comment.user.username,
-                "post": comment.post.post
+                "post": comment.post.post,
+                "img_url": str(comment.user.profile_image)
             })
             
 
         return JsonResponse(status=200, data=json_comments, safe=False)
+
+
+def get_id(request, id):
+    post = Posts.objects.get(id=id)
+    return JsonResponse(data=post.id, status=200, safe=False)
+
+@csrf_exempt
+def delete_post(request, id):
+    if request.method == 'POST':
+        post = Posts.objects.get(id=id)
+        Posts.delete(post)
+        return JsonResponse(status=200, data="Deleted Successfully", safe=False)
+
+
+@csrf_exempt
+def edit_post(request, id):
+    if request.method =='POST':
+        post = Posts.objects.get(id=id)
+        data = json.loads(request.body)
+        post.post = data['content']
+        post.save()
+        return JsonResponse(status=200, safe=False, data='Successfull')
+
+
+@csrf_exempt
+def search_users(request):
+    data = json.loads(request.body)
+    print(data['data'])
+    all_users = User.objects.raw("SELECT * FROM media_user WHERE instr(username, %s) > 0", [data['data']])
+    lis = []
+    for a in all_users:
+        print(a)
+        lis.append({
+            "username": a.username,
+            "profile_image": str(a.profile_image),
+            "first_name": a.first_name,
+            "last_name": a.last_name,
+            "bio": a.bio
+        })
+   
+    print(lis)
     
+    return JsonResponse(status=200, data=json.dumps(lis), safe=False)
+
+@csrf_exempt
+def isFollowing(request, current_user, user):
+    #data = json.loads(request.body)
+
+    u1 = User.objects.get(username=current_user)
+    u2 = User.objects.get(username=user)
+
+    is_following = False
+    check = Follow.objects.filter(userf=u1, user=u2)
+
+    if len(check) > 0:
+        is_following = True
+    else:
+        is_following = False
+    
+    return JsonResponse(status = 200, data=is_following, safe=False)
+ 

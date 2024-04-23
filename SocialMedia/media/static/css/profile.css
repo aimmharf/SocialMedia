@@ -125,7 +125,7 @@ p {
    
     background-color: #FFFFFF1A;
     margin-left: 20px;
-    
+    border-radius: 10px;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr ;
 }

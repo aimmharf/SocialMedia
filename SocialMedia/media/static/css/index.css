@@ -6,6 +6,7 @@ h1 {
 }
 body {
     background-color: #212121;
+    
 }
 
 p {
@@ -16,28 +17,85 @@ header {
     text-align: center;
 }
 
+.edit-post-text {
+    display: none;
+}
+
+.confirmation-sup-container {
+    
+    z-index: 3;
+    position: fixed;
+    top: 35%;
+    left: 35%;
+    width: 30vw;
+    height: 100vh;
+    
+   
+   
+}
+
+.confirmation-sup2-container {
+    background-color: white;
+    border-radius: 20px;
+    height: 30%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    
+}
+
+.confirmation-btn-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 7px;
+
+}
+
+#confirmation-text {
+    color: black;
+    font-size: 25px;
+    text-align: center;
+}
+
+#conf-btn-del {
+    background-color: red;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+}
+
+#conf-btn-cancel {
+    background-color: #0080FF;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+}
 .nav {
     position: fixed;
     top: 0px;
     height: 50%;
     width: 6%;
-    border: 1px solid #d3d3d3;
-    background-color: #f8f8f8;
+    border: 1px solid #060606;
+    background-color: #212121;
 }
 
 
 .nav-container{
    
-   display: grid;
-   grid-template-rows: 1fr 1fr 1fr 1fr;
+   position: absolute;
+   top: 10%;
+   height: 100%;
    width: 100%;
-   align-items: end;
-   justify-content: center;
-  
+    
 }
 
 .home-logout-container {
-    align-self: center;
+    position: absolute;
+    top:370px;
+    width: 100%;
 }
 
 .home-logout-container button a {
@@ -46,6 +104,7 @@ header {
     background-color: #FF3333;
 }
 .home-logout-container button {
+    width: 100%;
     background-color: #FF3333;
     border: 0;
     border-radius: 10px;
@@ -66,12 +125,26 @@ header {
     box-shadow: 1px 1px 7px;
 }
 .home-nav-container {
-    align-self: self-start;
+    position: absolute;
+    top: -30px;
+    left: 25px;
 }
 
+.home-explore-container {
+    position: absolute;
+    top: 110px;
+    left: 35px;
+}
+
+.profile-nav-container {
+    position: absolute;
+    top: 190px;
+    left:10px;
+}
 .home-message-container {
-    align-self: center;
-    justify-self: center;
+    position: absolute;
+    top: 20px;
+    left: 25px;
 }
 
 #btn-layout-profile {
@@ -113,7 +186,7 @@ header {
    
     height: 95vh;
     width: 95vw;
-   
+    
     
 
 }
@@ -217,9 +290,30 @@ header {
 .posts-top-container {
     display: grid;
     width: 100%;
-    grid-template-columns: 100px 200px;
+    grid-template-columns: 100px 200px auto;
     
     
+}
+
+.modify-post-container {
+    margin-top: 5px;
+    margin-right: 5px;
+    justify-self: end;
+}
+
+#btn-del-post {
+    background-color: red;
+    border: 0;
+    color: white;
+
+  
+}
+
+#btn-edit-post {
+    background-color: #0080FF;
+    color: white;
+    border: 0;
+    margin-left: 5px;
 }
 
 .post-text-container {
@@ -247,7 +341,17 @@ header {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-content: center;
     align-items: center;
-    background-color: white;
+   
+}
+
+.post-date-container {
+    display: grid;
+    justify-content: center;
+    align-items: end;
+}
+
+.post-date-container p {
+    margin: 0;
 }
 
 .img-icon-button, .img-like-button, .img-dislike-button {
@@ -277,14 +381,14 @@ header {
     margin: 0;
 }
 
-#btn-like-standard {
-    background-image: url("images/icon-like.png");
-    margin-left: 10px;
+
+
+#btn-like-standard:hover {
+    cursor: pointer;
 }
 
-#btn-like-liked {
-    background-image: url('images/download.png');
-    margin-left: 10px;
+#btn-like-liked:hover {
+    cursor: pointer;
 }
 
 #btn-dislike {
@@ -303,8 +407,8 @@ header {
 
 }
 
-#btn-comment {
-    background-image: url("images/comment.jpeg");
+#btn-comment:hover {
+   cursor: pointer;
 }
 
 #btn-share {
@@ -410,18 +514,22 @@ header {
    justify-content: right;
 }
 .comment-container > div {
+    /*
     border: 1px solid #d3d3d3;
     background-color: #202020;
     display: grid;
     row-gap: 30px;
     grid-template-rows: 0.2fr 1.2fr 0.3fr;
-    
+    */
 }
 .comment-user-names-container, .comment-input-container, .comment-btn-submit-container {
     display: grid;
     justify-content: center;
 }
 
+.comment-input:focus {
+    outline: 0;
+}
 .comment-btn-submit-container {
     grid-template-columns: 1fr 1fr;
     column-gap: 10px;
@@ -456,10 +564,21 @@ header {
 .post-comment{
     display: grid;
     justify-content: center;
-    border: 1px solid #202020;
-    background-color: #202020;
+    grid-template-columns: auto 1fr;
+    
+    background-color: #343434;
+    border-radius: 15px;
+
 }
 
+.post-comment-content {
+    display: grid;
+    justify-content: center;
+}
+
+.post-comment-img img {
+    border-radius: 45px;
+}
 
 
 .comment-post-container {
@@ -469,5 +588,68 @@ header {
 
 #like-count, #dislike-count, #comment-number {
     color: black;
+}
+
+#btn-edit-post-submit {
+    color: white;
+    background-color: #00994C;
+    border: 0;
+    border-radius: 5px;
+
+}
+
+#btn-edit-cancel {
+    background-color: #FF3333;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+}
+
+
+
+#edit-text:focus {
+    outline: 0;
+
+}
+#edit-text {
+    border: 0;
+    border-radius: 7px;
+}
+
+
+@media(max-width:1290px){
+    .suggested-people-container3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .home-nav-container {
+        left: 0px;
+    }
+    .home-message-container {
+        left: 0;
+    }
+    #btn-message {
+        height: 40px;
+        width: 40px;
+    }
+
+    .home-explore-container {
+        left: 5px;
+    }
+    .profile-nav-container {
+        left: 0;
+    }
+    #img-layout-profile {
+        height: 40px;
+        width: 40px;
+
+    }
+
+    .home-logout-container button {
+        width: auto;
+    }
+    .nav {
+        border: 0;
+    }
 }
 
