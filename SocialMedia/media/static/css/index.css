@@ -514,18 +514,22 @@ header {
    justify-content: right;
 }
 .comment-container > div {
+    /*
     border: 1px solid #d3d3d3;
     background-color: #202020;
     display: grid;
     row-gap: 30px;
     grid-template-rows: 0.2fr 1.2fr 0.3fr;
-    
+    */
 }
 .comment-user-names-container, .comment-input-container, .comment-btn-submit-container {
     display: grid;
     justify-content: center;
 }
 
+.comment-input:focus {
+    outline: 0;
+}
 .comment-btn-submit-container {
     grid-template-columns: 1fr 1fr;
     column-gap: 10px;
@@ -611,3 +615,41 @@ header {
     border: 0;
     border-radius: 7px;
 }
+
+
+@media(max-width:1290px){
+    .suggested-people-container3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .home-nav-container {
+        left: 0px;
+    }
+    .home-message-container {
+        left: 0;
+    }
+    #btn-message {
+        height: 40px;
+        width: 40px;
+    }
+
+    .home-explore-container {
+        left: 5px;
+    }
+    .profile-nav-container {
+        left: 0;
+    }
+    #img-layout-profile {
+        height: 40px;
+        width: 40px;
+
+    }
+
+    .home-logout-container button {
+        width: auto;
+    }
+    .nav {
+        border: 0;
+    }
+}
+

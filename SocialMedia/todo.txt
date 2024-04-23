@@ -26,3 +26,31 @@ Log 4/16/24:
 Stop At:
     - Finish implementation of explore page
     - Implement a 'coming soon page for every feature not added yet'
+
+
+
+
+
+
+
+Log 4/20/24:
+- continued implementation of explore page (almost done it)
+- added correct link to 'view all' in home page
+
+ToDo Tommorow:
+- Finish implementing the explore page
+- Start working on posts on the profile page
+- IF TIME: start working on mobile resonsiveness
+
+
+
+Log 4/22/24
+
+- finished explore page
+- worked on a few bugs
+
+ToDO Tommorow:
+ - Make mobile responsive
+ - finish profile posts
+ - fix bugs
+ - push final version to github

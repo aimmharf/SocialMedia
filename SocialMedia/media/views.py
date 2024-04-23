@@ -34,8 +34,7 @@ def index(request):
     for names in all_users_filterd:
         filterd_names.append(names.user.username)
    
-    
-    
+    filterd_names.append(request.user.username)
     
 
 
@@ -43,6 +42,10 @@ def index(request):
     all_users_following = []
     current_user = User.objects.get(username=request.user.username)
     followings = Follow.objects.filter(userf=current_user)
+    my_posts = Posts.objects.filter(user=request.user)
+    for myp in my_posts:
+        print(myp)
+        all_users_following.append(myp)
     for user in followings:
         post = Posts.objects.filter(username=user.user.username)
         for a in post:
@@ -96,7 +99,7 @@ def user_profile(request, username):
     if len(check_if_following) > 0:
         is_following = True
         
-        
+
     # Check how many followers the user of the page has
     followers_count = Follow.objects.filter(user=id)
     
@@ -243,7 +246,30 @@ def new_posts(request):
     return render(request, "media/newpost.html")
 
 def explore(request):
-    return render(request, "media/explore.html")
+    all_posts = Posts.objects.all().exclude(user=request.user)
+    all_users = User.objects.all()
+
+    # FILTER OUT ALL USERS THAT THE CURRENT USER IS NOT FOLLOWING
+    lis_of_follings = []
+
+    f = Follow.objects.filter(userf=request.user)
+    for p in f:
+        lis_of_follings.append(p.user.id)
+    lis_of_follings.append(request.user.id)
+    users = User.objects.all().exclude(pk__in=lis_of_follings)
+
+    user_followings = Follow.objects.filter(userf=request.user)
+    followings_usernames = []
+    for i in user_followings:
+        followings_usernames.append(i.user.username)
+    
+
+
+    return render(request, "media/explore.html", {
+        "all_posts":all_posts,
+        "all_users":users,
+        "followings_username": followings_usernames,
+    })
 
 
 # API'S
@@ -295,7 +321,7 @@ def current_user(request):
 def follow(request):
     # Loading the data sent from javascript
     data = json.loads(request.body)
-
+    print(data)
     # Getting the current user
     userf = User.objects.get(username=data["current_user"])
     print(data['user_being_followed'])
@@ -313,6 +339,7 @@ def follow(request):
     else:
         remove_follow = Follow.objects.get(user=user, userf=userf)
         remove_follow.delete()
+        
     
         # Returning a successfull json response 
         return JsonResponse(data='Unfollowed user', status=200, safe=False)
@@ -408,3 +435,42 @@ def edit_post(request, id):
         post.post = data['content']
         post.save()
         return JsonResponse(status=200, safe=False, data='Successfull')
+
+
+@csrf_exempt
+def search_users(request):
+    data = json.loads(request.body)
+    print(data['data'])
+    all_users = User.objects.raw("SELECT * FROM media_user WHERE instr(username, %s) > 0", [data['data']])
+    lis = []
+    for a in all_users:
+        print(a)
+        lis.append({
+            "username": a.username,
+            "profile_image": str(a.profile_image),
+            "first_name": a.first_name,
+            "last_name": a.last_name,
+            "bio": a.bio
+        })
+   
+    print(lis)
+    
+    return JsonResponse(status=200, data=json.dumps(lis), safe=False)
+
+@csrf_exempt
+def isFollowing(request, current_user, user):
+    #data = json.loads(request.body)
+
+    u1 = User.objects.get(username=current_user)
+    u2 = User.objects.get(username=user)
+
+    is_following = False
+    check = Follow.objects.filter(userf=u1, user=u2)
+
+    if len(check) > 0:
+        is_following = True
+    else:
+        is_following = False
+    
+    return JsonResponse(status = 200, data=is_following, safe=False)
+ 

@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(){
     })
 
     document.querySelector(".btn-post").addEventListener("click", post_content)
+    
     document.querySelectorAll(".img-like-button").forEach((button) => {
         getLikeCount(button)
        
@@ -324,7 +325,10 @@ async function comment(button) {
     // STYLING
     a.style.display = 'grid';
     a.style.gridRowGap = '20px';
-    a.querySelector(".comment-container").style.display = 'grid'
+    a.querySelector(".comment-container").style.display = 'grid';
+    a.querySelector(".js-comment-container").style.border = '1px solid #212121';
+    a.querySelector(".js-comment-container").style.gridRowGap = '10px';
+    
     button.disabled = true
 
     

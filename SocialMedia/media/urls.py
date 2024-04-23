@@ -23,7 +23,10 @@ urlpatterns = [
     path("comment/<int:id>", views.comment, name='commentUser'),
     path("post/<int:id>", views.get_id, name='id'),
     path("delete_post/<int:id>", views.delete_post, name='delete_post'),
-    path("edit_post/<int:id>", views.edit_post, name='edit_post')
+    path("edit_post/<int:id>", views.edit_post, name='edit_post'),
+    path("search_users", views.search_users, name='search_users'),
+    path("is_following/<str:current_user>/<str:user>", views.isFollowing, name='is_following')
+
     
     
 ]

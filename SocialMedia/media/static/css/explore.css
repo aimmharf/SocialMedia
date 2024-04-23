@@ -8,13 +8,99 @@ p {
 
 
 .super-container {
+    margin-top: 90px;
     height: 100vh;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
-    align-items: center;
+    
 }
 
 .users-profile-container {
+    margin-left: 130px;
+    
+}
+.users-post-container {
+   
 
 }
 
+.explore-users, .explore-users-extra {
+    width: 85%;
+    background-color: #343434;
+    margin-bottom: 20px;
+    display: grid;
+    row-gap: 20px;
+    border-radius: 20px;
+    
+    
+}
+
+
+
+.explore-users-first {
+    display: grid;
+    grid-template-columns: 0.4fr 0.4fr;
+    text-align: center;
+   
+}
+
+.explore-users-second {
+    display: grid;
+    justify-content: center;
+
+}
+
+.explore-users-third {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    column-gap: 20px;
+}
+
+.explore-btn-followw {
+    background-color: #0066CC;
+    border: 0;
+    border-radius: 15px;
+    color: white;
+}
+
+
+#btn-message-explore {
+    background-color: #00994C;
+    border: 0;
+    border-radius: 15px;
+    color: white;
+}
+
+#explore-users-profile-pic {
+    border-radius: 40px;
+}
+
+#explore-users-username {
+    text-align: center;
+    font-size: 18px;
+    font-family: monospace;
+    font-weight: bold;
+}
+.explore-users-first a {
+    justify-self: self-start;
+}
+
+
+.explore-header input {
+    width: 60%;
+    height: 40px;
+    border-radius: 12px;
+    border: 0;
+    background-color: #343434;
+}
+
+.explore-header input:focus {
+    outline: 0;
+    color: white;
+}
+
+.explore-header input::placeholder {
+    color: white;
+}
