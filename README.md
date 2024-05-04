@@ -1,5 +1,6 @@
 Project Title: Talk Me
-Youtube Url: 
+Youtube Url: https://youtu.be/XpMXfrqTJQE
+
 
 
 In the time of digital technologies, social networking platforms have been a fundamentally important  part of our day to day lives, making the way we connect, communicate, and share information more easier. Among the many applications of social media platforms, Talk Me emerges as a one of a kind and a new innovation, making the platform with its comprehensive features and a fantastic user experience. Made as a full-stack web application, Talk Me showcases the essence of modern social networking, offering users a platform to connect with friends, share content, and engage in chill online communities.
